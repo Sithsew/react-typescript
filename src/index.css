@@ -11,3 +11,46 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#root > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make the DrawerAppBar fixed at the top */
+.DrawerAppBar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Make the Footer fixed at the bottom */
+.Footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+/* Make the middle content scrollable */
+.MiddleContent {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px; /* Adjust padding as needed */
+}
+
