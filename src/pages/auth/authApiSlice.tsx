@@ -1,3 +1,6 @@
+import { ILogin } from "../../interfaces/login.interface";
+import { IUser } from "../../interfaces/user.interface";
+
 const baseUrl = "http://localhost:3500/api";
 
 const fetchJson = async (url: string, options: RequestInit) => {
@@ -5,7 +8,8 @@ const fetchJson = async (url: string, options: RequestInit) => {
   return response.json();
 };
 
-export const login = async (credentials: { email: string; password: string }) => {
+// login user to the system
+export const login = async (credentials: ILogin) => {
   return fetchJson("/auth/login", {
     method: "POST",
     body: JSON.stringify(credentials),
@@ -15,7 +19,8 @@ export const login = async (credentials: { email: string; password: string }) =>
   });
 };
 
-export const register = async (userData: { name: string; email: string; password: string }) => {
+// register user in to the system
+export const register = async (userData: IUser) => {
   return fetchJson("/auth/signup", {
     method: "POST",
     body: JSON.stringify(userData),

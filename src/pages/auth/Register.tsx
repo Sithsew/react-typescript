@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/CustomButton";
 import { logout, setUserDetails } from "./authSlice";
 import { toast } from "react-toastify";
+import { IUser } from "../../interfaces/user.interface";
 
 interface UserData {
   name: string;
@@ -33,6 +34,7 @@ const Register: React.FC = () => {
 
   const navigate = useNavigate();
 
+  // logout automatically when load register page
   useEffect(() => {
     logout();
   }, []);
@@ -45,6 +47,7 @@ const Register: React.FC = () => {
     }));
   };
 
+  // show hide password when click on eye icon
   const toggleShowPassword = () => {
     setUserData((prevData) => ({
       ...prevData,
@@ -52,6 +55,7 @@ const Register: React.FC = () => {
     }));
   };
 
+  // show hide confirm password when click on eye icon
   const toggleShowConfirmPassword = () => {
     setUserData((prevData) => ({
       ...prevData,
@@ -83,6 +87,7 @@ const Register: React.FC = () => {
     return isValid;
   };
 
+    // disable submit button to prevent unnecessary api calls
   const disableButton = (status: boolean) => {
     setUserData((prevData) => ({
       ...prevData,
@@ -90,6 +95,7 @@ const Register: React.FC = () => {
     }));
   };
 
+  // register new user in the system 
   const handleRegistration = async (e: FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
@@ -98,7 +104,7 @@ const Register: React.FC = () => {
         return;
       }
       disableButton(true);
-      const user = {
+      const user: IUser = {
         name: userData.name,
         email: userData.email.toLowerCase(),
         password: userData.password
@@ -108,7 +114,7 @@ const Register: React.FC = () => {
         disableButton(false);
         console.log("New User Registered:", newUser);
         toast.success(newUser.message);
-        setUserDetails(newUser.data.access_token, newUser.data.name);
+        setUserDetails(newUser.data);
         navigate("/dashboard");
       } else {
         disableButton(false);

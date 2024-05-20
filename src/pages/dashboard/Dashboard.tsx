@@ -8,6 +8,7 @@ const Dashboard: React.FC = () => {
   const name = getUserName();
   const timeOfDay = getTimeOfDay();
 
+  // get current time
   function getTimeOfDay() {
     const currentHour = new Date().getHours();
     if (currentHour < 12) {
@@ -19,6 +20,7 @@ const Dashboard: React.FC = () => {
     }
   }
 
+  // show greeetings to the user according to time
   function getGreeting() {
     switch (timeOfDay) {
       case 'morning':

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/CustomButton";
 import { logout, setUserDetails } from "./authSlice";
 import { toast } from "react-toastify";
+import { ILogin } from "../../interfaces/login.interface";
 
 interface UserData {
   email: string;
@@ -25,7 +26,7 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate();
 
-  // login automatically when load login page
+  // logout automatically when load login page
   useEffect(() => {
     logout();
   }, []);
@@ -63,11 +64,12 @@ const Login: React.FC = () => {
     try {
       e.preventDefault();
       disableButton(true);
-      const result = await login({ email: userData.email, password: userData.password });
+      const user: ILogin = { email: userData.email, password: userData.password }
+      const result = await login(user);
       if (result.statusCode === 200) {
         console.log("Login successful:", result);
         toast.success(result.message);
-        setUserDetails(result.data.access_token, result.data.name);
+        setUserDetails(result.data);
         disableButton(false);
         navigate("/dashboard");
       } else {
