@@ -1,4 +1,4 @@
 export interface ILoginDetails {
-  token: string;
-  username: string;
+  access_token: string;
+  name: string;
 }

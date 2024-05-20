@@ -64,7 +64,7 @@ const Login: React.FC = () => {
     try {
       e.preventDefault();
       disableButton(true);
-      const user: ILogin = { email: userData.email, password: userData.password }
+      const user: ILogin = { email: userData.email.toLowerCase(), password: userData.password }
       const result = await login(user);
       if (result.statusCode === 200) {
         console.log("Login successful:", result);
